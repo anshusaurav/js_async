@@ -1,0 +1,10 @@
+.flex{
+    display: flex;
+}
+img{
+    border-radius: 50%;
+}
+.result{
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+}

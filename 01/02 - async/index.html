@@ -44,6 +44,7 @@
         console.log('hi');
         let timerIdNested = setTimeout(f, 1000);
         setTimeout(()=>clearTimeout(timerIdNested), 5000);
+        setTimeout(()=>clearTimeout(timerId), 5000);
       },1000);
       setTimeout(()=>clearTimeout(timerId), 5000);
       
