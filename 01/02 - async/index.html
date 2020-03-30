@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    .selected {
+      background: #0f0;
+    }
+
+    li {
+      cursor: pointer;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  Click on a list item to select it.
+  <br>
+
+  <ul id="ul">
+    <li>Christopher Robin</li>
+    <li>Winnie-the-Pooh</li>
+    <li>Tigger</li>
+    <li>Kanga</li>
+    <li>Rabbit. Just rabbit.</li> 
+  </ul>
+
+  <script>
+    // function everyXsecsForYsecs(cb, x, y) {
+    //   let timerId = setInterval(cb, x*1000);
+    //   setTimeout(()=>clearInterval(timerId), y*1000);
+    // }
+    // // Uncomment the following lines to check your work!
+    // function theEnd() {
+    //   console.log('This is the end!');
+    // }
+    // everyXsecsForYsecs(theEnd, 2, 20); // should invoke theEnd function every 2 seconds, for 20 seconds): This is the end!
+
+    function limitedRepeat() {
+      let timerId = setTimeout(function f(){
+        console.log('hi');
+        let timerIdNested = setTimeout(f, 1000);
+        setTimeout(()=>clearTimeout(timerIdNested), 5000);
+      },1000);
+      setTimeout(()=>clearTimeout(timerId), 5000);
+      
+    }
+    limitedRepeat(); // should log (every second, for 5 seconds): hi for now
+
+    // function brokenRecord() {
+    //     //setInterval(()=>console.log('hi again'), 1000);
+    //     setTimeout(function f(){
+    //       console.log('hi again');
+    //       setTimeout(f, 1000);
+    //     },1000);
+    // }
+    // brokenRecord();
+
+// function checkUser(userName){
+//   // who the hack is really human here ?
+//   let imp = 'Mxyzptlk'.toLowerCase();
+//   userName = userName.toLowerCase();
+//   userName.replace('0','o');
+//   userName.replace('1','l');
+//   userName.replace('2','z');
+//   userName.replace('3','e');
+//   userName.replace('4','a');
+//   userName.replace('5','s');
+//   userName.replace('6','b');
+//   userName.replace('7','t');
+//   userName.replace('8','b');
+//   userName.replace('9','g');
+//   let str = '';
+//   for(let i = 0; i < imp.length; i++){
+//     if(userName.indexOf(imp.charAt(i)) != -1)
+//       str+='1';
+//     else
+//       str+='0';
+//   }
+//   console.log(str);
+//   let f = (100*parseInt(str, 2))/255;
+  
+//   console.log(f, parseInt(str,2));
+//   if( f <  1)return "This one's too clean, should be a bot.";
+//   else if(f < 50) return "This one seems ok, may be there's still some humans around here..."
+//   else if(f < 90) return "This one's probably an alien from 5th dim, be careful!";
+//   else return "Yeeerk!!! Mr Mxyztplk himself the imp of imps! Only Superman can beat him!";
+  
+
+
+//   function smallestDiff(arr1, arr2) {
+//   //code here
+//   //console.log(arr1, arr2);
+//   if(arr1.length == 0 && arr2.length == 0)
+//     return -1;
+//   arr1.sort((a,b) => a-b);
+//   arr2.sort((a,b) => a-b);
+//   if(arr1.length == 0)
+//     return arr2[0];
+//   if(arr2.length == 0)
+//     return arr1[0];
+//   if(arr1.length == arr2.length)
+//     return Math.min(Math.abs(arr2[0] - arr1[0]), Math.abs(arr2[0] - arr1[arr1.length-1]), Math.abs(arr2[arr2.length-1] - arr1[0]),Math.abs(arr2[arr2.length-1] - arr1[arr1.length-1]));     
+//   return Math.min(arr1[0], arr2[0]);
+// }
+// }
+  </script>
+
+</body>
+</html>
