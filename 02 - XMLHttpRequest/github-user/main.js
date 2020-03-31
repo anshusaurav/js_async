@@ -12,17 +12,18 @@ let queryField = document.querySelector('#userField');
 let searchButton = document.querySelector('#searchButton');
 function getResults(uName){
     let xhr = new XMLHttpRequest();
-    xhr.open('GET', 'https://api.github.com/users/'+uName);
+    xhr.open('GET', `https://api.github.com/users/${uName}`);
     xhr.send();
     xhr.onload = function() {
         let res = xhr.response;
         console.log(xhr.response);
+        
         let json = JSON.parse(res);
-
         let imgUrl = json['avatar_url'];
         let name = json['name'];
         let id = json['id'];
         let bio = json['bio'];
+
         imgElem.setAttribute('src', imgUrl);
         imageElem.append(imgElem);
         nameElem.textContent = name;

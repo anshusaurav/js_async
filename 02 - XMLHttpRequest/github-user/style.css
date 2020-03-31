@@ -1,5 +1,9 @@
-.flex{
+.form{
     display: flex;
+    margin: 0 auto;
+    /* text-align: center; */
+    justify-content: center; 
+    /* align-items: center;  */
 }
 img{
     border-radius: 50%;
@@ -7,4 +11,37 @@ img{
 .result{
     display: grid;
     grid-template-columns: 1fr 4fr;
+}
+.container{
+    width: 724px;
+    margin: 0 auto;
+}
+body{
+    background-color: #4797EF;
+    text-align: center;
+}
+.main >p{
+    color: white;
+    font-family: "Ubuntu Mono", monospace;
+    font-size: 24px;
+}
+#userField{
+    padding: 1rem;
+    font-size: 1rem;
+    width: 80%;
+    background-color: #4B7BEC;
+    border: none;
+    font-family: "Ubuntu Mono", monospace;
+    color: #fff;
+}
+#searchButton{
+    padding: 12px;
+    width: 20%;
+    color: #45aaf2;
+    font-size: 1rem;
+    font-family: "Ubuntu Mono", monospace;
+    border: none;
+}
+#userField::placeholder{
+    color: rgb(240, 231, 231);
 }
