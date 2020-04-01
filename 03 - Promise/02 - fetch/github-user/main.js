@@ -61,7 +61,10 @@ function displayFollowers(uName){
             obj.login = follower.login;
             followerList.push(obj);
         });
-    });
+        return followerList;
+    }).then(fol=>{
+        console.log(fol);
+    })
 }
 
 
@@ -94,7 +97,10 @@ function displayRepos(uName){
             repoList.push(obj);
         });
         return repoList;
-    }).then(rep=>build(rep[0].name))
+    }).then(rep=>{
+        rep = rep.sort((a,b)=>Date.parse(a.updated_at) - Date.parse(b.updated_at));
+        console.log(rep);
+    })
 }
 displayUser(name);
 displayFollowers(name);

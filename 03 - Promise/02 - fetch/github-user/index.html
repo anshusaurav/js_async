@@ -5,10 +5,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="style.css" />
+    <script src="https://kit.fontawesome.com/f4ce9ea80b.js" crossorigin="anonymous"></script>
     <title>Github User Search</title>
   </head>
   <body>
-    // Your code goes here
+    <header class="header padding">
+      <div class='left-header'>
+        <div class='logo-img'>
+          <div class="img-logo">
+            <img src="GitHub-Mark-120px-plus.png" alt="Git-Logo" class="img-git">
+          </div>
+          <h1 class='main-header'>Github User Search</h1>
+        </div>
+        <div class='header-desc'>
+          <p class='header-exp'>Browse users and their profiles via <span class='span-header'>the Github API</span></p>
+        </div>
+      </div>
+      <div class='right-header'>
+        <input type="search" id = "searchinput" placeholder="Search for a user, e.g. anshusaurav" results="0" />
+      </div>
+    </header>
+    <main class="main">
+      <section class="result-user">
+        <div class='user-image'>
+          <img class="profile-img" alt="Vivek" src="https://avatars1.githubusercontent.com/u/57837882?v=4"/>
+        </div>
+        <div class='user-info'>
+          <div>
+            <h2>Vivek Baruah <span>@vivekbrh01</span></h2> 
+          </div>
+          <h3>Engineer, Programmer, Educationist</h3>
+          <div class='user-info-flex'>
+            <i class="fas fa-user-friends"></i>
+            <p>Competition Care Ventures Pvt. Ltd.</p>
+          </div>
+          <div class='user-info-flex'>
+            <i class="fas fa-map-marker-alt"></i>
+            <p>Guwahati, Assam</p>
+          </div>
+          <div class='user-info-flex'>
+            <i class="fab fa-microblog"></i>
+            <a href='https://chaovivek.digital/'>https://chaovivek.digital/</a>
+          </div>
+          <div class='user-data'>
+            <div>
+              <h4>5</h4>
+              <p>Followers</p>
+            </div>
+            <div>
+              <h4>3</h4>
+              <p>Following</p>
+            </div>
+            <div>
+              <h4>28</h4>
+              <p>Repos</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
     <script src="main.js"></script>
   </body>
 </html>
