@@ -1,18 +1,20 @@
 // Challenge 1
 
 function sayHello() {
-
+  setTimeout(()=> console.log('Hello'), 1000);
 }
 
 // Uncomment the line below when ready
-// sayHello(); // should log "Hello" after 1000ms
+sayHello(); // should log "Hello" after 1000ms
 
 
 // Challenge 2
 var promise = new Promise(function (resolve, reject) {
-  // ADD CODE HERE
+  setTimeout(()=>resolve('Resolved!'),1000);
 });
-
+promise.then(
+  result => console.log(result)
+);
 // Should print out "Resolved!"
 // ADD CODE HERE
 
@@ -20,9 +22,11 @@ var promise = new Promise(function (resolve, reject) {
 // Challenge 3
 
 promise = new Promise(function(resolve, reject) {
-  // ADD CODE HERE
+  reject('Rejected');
 })
-
+promise.then(
+  error=>console.log(error)
+)
 // Should print out "Reject!"
 // ADD CODE HERE
 

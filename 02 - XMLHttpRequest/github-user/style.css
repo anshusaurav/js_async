@@ -3,14 +3,23 @@
     margin: 0 auto;
     /* text-align: center; */
     justify-content: center; 
+    margin: 1rem 0;
+    margin-bottom: 2rem;
     /* align-items: center;  */
 }
 img{
     border-radius: 50%;
+    height: 128px;
+    width: 128px;
+
 }
 .result{
-    display: grid;
-    grid-template-columns: 1fr 4fr;
+    display: none;
+    grid-template-columns: 1fr 3fr;
+    border: 1px solid #ddd;
+    padding: 1rem;
+    margin: 16px 0;
+    box-sizing: border-box;
 }
 .container{
     width: 724px;
@@ -19,11 +28,14 @@ img{
 body{
     background-color: #4797EF;
     text-align: center;
+    padding-top: 35vh;
 }
 .main >p{
     color: white;
     font-family: "Ubuntu Mono", monospace;
     font-size: 24px;
+    font-weight: 600;
+    text-align: center;
 }
 #userField{
     padding: 1rem;
@@ -33,6 +45,7 @@ body{
     border: none;
     font-family: "Ubuntu Mono", monospace;
     color: #fff;
+    font-weight: 500;
 }
 #searchButton{
     padding: 12px;
@@ -41,7 +54,20 @@ body{
     font-size: 1rem;
     font-family: "Ubuntu Mono", monospace;
     border: none;
+    cursor: pointer;
+    font-weight: 500;
 }
 #userField::placeholder{
     color: rgb(240, 231, 231);
+}
+p{
+    color: white;
+    font-family: "Ubuntu Mono", monospace;
+    text-align: left;
+    font-weight: 500;
+}
+
+.loading{
+    /* display: none; */
+    text-align: center;
 }
