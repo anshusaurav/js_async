@@ -56,6 +56,10 @@ body{
     font-family: Arial, Helvetica, sans-serif;
     line-height: 1.5;
 }
+a{
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+}
 .header{
     display: flex;
     flex-wrap: wrap;
@@ -192,7 +196,53 @@ h1{
 .user-data  p{
     text-align: center;
 }
-
+.repos{
+    width: 50%;
+}
 .repo-li{
     border-bottom: 1px solid #ddd;
 }
+.result-all h3{
+    font-size: 1.6rem;
+    font-weight: 700;;
+}
+.result-all a{
+    color: rgb(81, 147, 59);
+    font-size: 1.3;
+}
+#fork-link{
+    color: #888;
+}
+.repo-desc{
+    font-size: 1.2;
+}
+.li-footer{
+    display: flex;
+    justify-content: space-between;
+}
+.li-footer-left{
+    display: flex;
+    width: 20%;
+    justify-content: space-between;
+
+}
+.li-footer{
+    margin-top: 2rem;
+    
+}
+.star-div{
+    display: flex;
+    align-items: center;
+}
+.fork-div{
+    display: flex;
+    align-items: center;
+}
+.fas{
+    margin-right: 0.2rem;
+}
+.li-footer p{
+    color: #888;
+
+}
+

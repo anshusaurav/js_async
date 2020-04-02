@@ -7,6 +7,8 @@ const repoList = [];
 const followerList = [];
 const resultElem = document.querySelector('.result-user');
 const searchinputElem = document.querySelector('#searchinput');
+const repoElem = document.querySelector('.repos');
+const allRepoElem = document.querySelector('.all-repos');
 searchinputElem.addEventListener('keydown', process);
 function getUser(uName) {
     let job = fetch(`https://api.github.com/users/${uName}`).then(
@@ -94,6 +96,7 @@ function getUserFollowers(uName) {
    return job;
 }
 function displayFollowers(uName){
+    //console.log(getUserFollowers(uName));
     getUserFollowers(uName).then(followers =>{
         followers.forEach(follower =>{
             let obj = Object.create(null);
@@ -125,7 +128,7 @@ function getUserRepos(uName) {
    return job;
 }
 function displayRepos(uName){
-    console.log(getUserRepos(uName));
+   //console.log(getUserRepos(uName));
     getUserRepos(uName).then(repos =>{
         repos.forEach(repo =>{
             let obj = Object.create(null);
@@ -136,12 +139,44 @@ function displayRepos(uName){
             obj.stargazers_count = repo.stargazers_count;
             obj.forks = repo.forks;
             obj.updated_at = repo.updated_at;
+            obj.description = repo.language;
             repoList.push(obj);
         });
         return repoList;
     }).then(rep=>{
         rep = rep.sort((a,b)=>Date.parse(a.updated_at) - Date.parse(b.updated_at));
-        console.log(rep);
+        repoElem.innerHTML(`
+        <h3>Repositories</h3>
+        <ul class='all-repos'>
+        </ul>`);
+        let s = '';
+        rep.forEach(repo=>{
+            s+= `<li class='repo-li'>
+            <a href=${repo.html_url} target='_blank'>${repo.name}</a>
+            <a id='fork-link' href=${repo.forks_url}>(fork)</a>
+            <p class='repo-desc'>${repo.description}</p>
+            <div class='li-footer'>
+              <div class='li-footer-left'>
+                <div>
+                  <p>${repo.language}</p>
+                </div>
+                <div class='star-div'>
+                  <i class="fas fa-star"></i>
+                  <p class='star-mark'>${repo.stargazers_count}</p>
+                </div>
+                <div class='fork-div'>
+                  <i class="fas fa-code-branch"></i>
+                  <p class='fork-mark'>${repo.forks}</p>
+                </div>
+              </div>
+              <div>
+                <p>last push 5 days ago</p>
+              </div>
+            </div>
+          </li>`;
+        });
+        allRepoElem.innerHTML = s;
+        //console.log(rep);
     })
 }
 
@@ -151,6 +186,10 @@ function process(event){
     if(event.keyCode == 13){
         name = this.value;
         displayUser(name);
+        displayRepos(name);
         this.value = '';
     }
+}
+function daysBetweenDate(dt) {
+
 }
