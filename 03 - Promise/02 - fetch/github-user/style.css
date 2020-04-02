@@ -104,7 +104,7 @@ h1{
     align-items: center;
 }
 .span-header{
-    color: rgb(152, 228, 126);
+    color: rgb(81, 147, 59);
 }
 #searchinput{
     padding: 0.5rem 1rem;
@@ -145,7 +145,8 @@ h1{
 }
 .user-info span{
     font-size: 1rem;
-    color: rgb(152, 228, 126);
+    padding-left: 0.4rem;
+    color: rgb(81, 147, 59);
 }
 .user-info h3{
     padding-top: 0.3rem;
@@ -173,7 +174,7 @@ h1{
     margin-left: 0.4rem;
     font-size: 1rem;
     font-weight: 500;
-    color: rgb(152, 228, 126);
+    color: rgb(81, 147, 59);
     width: 80%
 }
 .user-data{
@@ -190,4 +191,8 @@ h1{
 }
 .user-data  p{
     text-align: center;
+}
+
+.repo-li{
+    border-bottom: 1px solid #ddd;
 }
