@@ -9,6 +9,7 @@ const resultElem = document.querySelector('.result-user');
 const searchinputElem = document.querySelector('#searchinput');
 const repoElem = document.querySelector('.repos');
 const allRepoElem = document.querySelector('.all-repos');
+const followerElem = document.querySelector('.followers');
 searchinputElem.addEventListener('keydown', process);
 function getUser(uName) {
     let job = fetch(`https://api.github.com/users/${uName}`).then(
@@ -39,7 +40,7 @@ function displayUser(uName){
         mUser.followers = user.followers;
         mUser.following = user.following;
         mUser.public_repos = user.public_repos;
-        console.log(mUser); 
+        //console.log(mUser); 
         return mUser;
     }).then(us=>{
         resultElem.innerHTML = `<div class='user-image'>
@@ -106,7 +107,23 @@ function displayFollowers(uName){
         });
         return followerList;
     }).then(fol=>{
-        console.log(fol);
+      let s = `
+      <h3>Followers</h3>
+      <ul class='all-followers'>
+      </ul>`;
+      fol.forEach(foll => {
+          s+= `<li class='follower-li'>
+          <div class='follower-img'>
+            <img class='image-fol' src=${foll.avatar_url} alt=${foll.login}/>
+          </div>
+          <div>
+            <p class='follower-id'>${foll.login}</p>
+          </div>
+        </li>`;
+      });
+      s+=`</ul>`
+      followerElem.innerHTML = s;
+      //console.log(rep);
     })
 }
 
@@ -128,7 +145,7 @@ function getUserRepos(uName) {
    return job;
 }
 function displayRepos(uName){
-   //console.log(getUserRepos(uName));
+    //console.log(getUserRepos(uName));
     getUserRepos(uName).then(repos =>{
         repos.forEach(repo =>{
             let obj = Object.create(null);
@@ -139,18 +156,17 @@ function displayRepos(uName){
             obj.stargazers_count = repo.stargazers_count;
             obj.forks = repo.forks;
             obj.updated_at = repo.updated_at;
-            obj.description = repo.language;
+            obj.langauge = repo.language;
             repoList.push(obj);
         });
         return repoList;
     }).then(rep=>{
-        rep = rep.sort((a,b)=>Date.parse(a.updated_at) - Date.parse(b.updated_at));
-        repoElem.innerHTML(`
+        rep = rep.sort((a,b)=>Date.parse(b.updated_at) - Date.parse(a.updated_at));
+        let s = `
         <h3>Repositories</h3>
         <ul class='all-repos'>
-        </ul>`);
-        let s = '';
-        rep.forEach(repo=>{
+        </ul>`;
+        rep.forEach(repo => {
             s+= `<li class='repo-li'>
             <a href=${repo.html_url} target='_blank'>${repo.name}</a>
             <a id='fork-link' href=${repo.forks_url}>(fork)</a>
@@ -170,23 +186,25 @@ function displayRepos(uName){
                 </div>
               </div>
               <div>
-                <p>last push 5 days ago</p>
+                <p>${repo.updated_at}</p>
               </div>
             </div>
           </li>`;
         });
-        allRepoElem.innerHTML = s;
+        s+=`</ul>`
+        repoElem.innerHTML = s;
         //console.log(rep);
     })
 }
 
-displayFollowers(name);
-displayRepos(name);
+//displayFollowers(name);
+//displayRepos(name);
 function process(event){
     if(event.keyCode == 13){
         name = this.value;
         displayUser(name);
         displayRepos(name);
+        displayFollowers(name);
         this.value = '';
     }
 }
