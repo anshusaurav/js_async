@@ -66,18 +66,38 @@
 //   return promise;
 // }
 
-var secondPromise = new Promise(function(resolve, reject){
-  setTimeout(() => resolve("Second!"), 1000);
-});
-var firstPromise = new Promise(function(resolve, reject){
-  setTimeout(() => resolve(secondPromise), 1000);
-});
-firstPromise.then(sP => console.log(sP));
+// var secondPromise = new Promise(function(resolve, reject){
+//   setTimeout(() => resolve("Second!"), 1000);
+// });
+// var firstPromise = new Promise(function(resolve, reject){
+//   setTimeout(() => resolve(secondPromise), 1000);
+// });
+// firstPromise.then(sP => console.log(sP));
 
 // Uncomment the code below to test
 // This code should log "Hello" after 1000ms
 
+const fakePeople = [
+  { name: 'Rudolph', hasPets: false, currentTemp: 98.6 },
+  { name: 'Zebulon', hasPets: true, currentTemp: 22.6 },
+  { name: 'Harold', hasPets: true, currentTemp: 98.3 },
+]
 
+const fakeAPICall = (i) => {
+  const returnTime = Math.floor(Math.random() * 1000);
+  return new Promise((resolve, reject) => {
+    if (i >= 0 && i < fakePeople.length) {
+      setTimeout(() => resolve(fakePeople[i]), returnTime);
+    } else {
+      reject({ message: "index out of range" });
+    }
+  });
+};
+
+function getAllData() {
+  let arr = fakePeople.map((elem, index) =>(fakeAPICall(index)));
+  Promise.all(arr).then(console.log);
+}
   </script>
 
 </body>

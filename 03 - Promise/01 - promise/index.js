@@ -38,7 +38,8 @@ promise = new Promise(function (resolve, reject) {
 // Uncomment the lines below when ready
 promise.then(() => console.log('Promise has been resolved!'));
 console.log("I'm not the promise!");
-
+//I'm not a promise is printed first since other call of console.log is 
+//asynchronous and performed later
 // Challenge 5
 function delay(){
   let promise = new Promise(function (resolve, reject) {
@@ -85,5 +86,6 @@ const fakeAPICall = (i) => {
 };
 
 function getAllData() {
-  // CODE GOES HERE
+  let arr = fakePeople.map((elem, index) =>(fakeAPICall(index)));
+  Promise.all(arr).then(console.log);
 }
