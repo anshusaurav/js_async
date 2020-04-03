@@ -110,6 +110,12 @@ h1{
 .span-header{
     color: rgb(81, 147, 59);
 }
+.github-api{
+    color: rgb(81, 147, 59);
+}
+.github-api:hover{
+    color: rgb(52, 138, 26);
+}
 #searchinput{
     padding: 0.5rem 1rem;
     width: 50%;
@@ -248,6 +254,7 @@ h1{
 }
 .li-footer p{
     color: #888;
+    min-width: 80px;
 
 }
 
@@ -275,4 +282,14 @@ li{
 .follower-id{
     font-size: 1.6;
     font-weight: 600;
+}
+.loading-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20%;
+    margin: 0 40%;
+}
+.loading{
+    width: 48px;
 }

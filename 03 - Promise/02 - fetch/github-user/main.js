@@ -11,8 +11,29 @@ const repoElem = document.querySelector('.repos');
 const allRepoElem = document.querySelector('.all-repos');
 const followerElem = document.querySelector('.followers');
 searchinputElem.addEventListener('keydown', process);
+searchinputElem.addEventListener('keyup', processInstant);
+function instantSearch(uName){
+  let job = fetch(`https://api.github.com/search/users?q=${uName}`)
+  .then(
+        successResponse => {
+            if (successResponse.status != 200) {
+                return null;
+            } 
+            else {
+                return successResponse.json();
+            }
+        },
+        failResponse => {
+            return null;
+        }
+    )
+    console.log(job);
+   return job;
+}
 function getUser(uName) {
-    let job = fetch(`https://api.github.com/users/${uName}`).then(
+    let job = fetch(`https://api.github.com/users/${uName}`,{
+      credentials: "same-origin",
+    }).then(
         successResponse => {
             if (successResponse.status != 200) {
                 return null;
@@ -29,6 +50,7 @@ function getUser(uName) {
 }
 
 function displayUser(uName){
+  console.log(uName);
     getUser(uName).then(user =>{
         mUser.avatar_url = user.avatar_url;
         mUser.name = user.name;
@@ -61,7 +83,7 @@ function displayUser(uName){
         </div>
         <div class='user-info-flex'>
           <i class="fab fa-microblog"></i>
-          <a href=${us.blog}>${us.blog}/</a>
+          <a href=${us.blog}>${us.blog}</a>
         </div>
         <div class='user-data'>
           <div>
@@ -78,10 +100,17 @@ function displayUser(uName){
           </div>
         </div>
       </div>`
+    }).catch(error=>{
+      resultElem.innerHTML = `<div class='loading-div'>
+      <h2>No result Found</h2>
+    </div>`;;
+
     });
 }
 function getUserFollowers(uName) {
-    let job = fetch(`https://api.github.com/users/${uName}/followers`).then(
+    let job = fetch(`https://api.github.com/users/${uName}/followers`,{
+      credentials: "same-origin",
+    }).then(
         successResponse => {
             if (successResponse.status != 200) {
                 return null;
@@ -129,7 +158,9 @@ function displayFollowers(uName){
 
 
 function getUserRepos(uName) {
-    let job = fetch(`https://api.github.com/users/${uName}/repos`).then(
+    let job = fetch(`https://api.github.com/users/${uName}/repos`,{
+      credentials: "same-origin",
+    }).then(
         successResponse => {
             if (successResponse.status != 200) {
                 return null;
@@ -145,18 +176,20 @@ function getUserRepos(uName) {
    return job;
 }
 function displayRepos(uName){
-    //console.log(getUserRepos(uName));
+    console.log(getUserRepos(uName));
     getUserRepos(uName).then(repos =>{
         repos.forEach(repo =>{
             let obj = Object.create(null);
+            console.log(repo);
             obj.name = repo.name;
             obj.html_url = repo.html_url;
-            obj.forks_url = repo.url;
+            obj.forks_url = repo.clone_url;
             obj.description = repo.description;
             obj.stargazers_count = repo.stargazers_count;
             obj.forks = repo.forks;
             obj.updated_at = repo.updated_at;
-            obj.langauge = repo.language;
+            obj.lang = repo.language;
+            console.log(obj);
             repoList.push(obj);
         });
         return repoList;
@@ -170,11 +203,11 @@ function displayRepos(uName){
             s+= `<li class='repo-li'>
             <a href=${repo.html_url} target='_blank'>${repo.name}</a>
             <a id='fork-link' href=${repo.forks_url}>(fork)</a>
-            <p class='repo-desc'>${repo.description}</p>
+            <p class='repo-desc'>${repo.description||''}</p>
             <div class='li-footer'>
               <div class='li-footer-left'>
                 <div>
-                  <p>${repo.language}</p>
+                  <p>${repo.lang||' '}</p>
                 </div>
                 <div class='star-div'>
                   <i class="fas fa-star"></i>
@@ -202,11 +235,24 @@ function displayRepos(uName){
 function process(event){
     if(event.keyCode == 13){
         name = this.value;
+        repoElem.innerHTML='';
+        followerElem.innerHTML='';
+        resultElem.innerHTML = `<div class='loading-div'>
+        <img class='loading' src='Spinner-1s-353px.gif'>
+      </div>`;
         displayUser(name);
         displayRepos(name);
         displayFollowers(name);
         this.value = '';
     }
+    
+}
+function processInstant(event){
+  if(event.keyCode!=13){
+    name = this.value;
+    console.log(name);
+    //instantSearch(name);
+  }
 }
 function daysBetweenDate(dt) {
 
