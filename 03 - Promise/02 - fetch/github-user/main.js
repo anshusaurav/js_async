@@ -1,6 +1,3 @@
-// Your code goes here
-// let p = document.createElement('p');
-// document.body.append(p);
 let mUser = {};
 const repoList = [];
 const followerList = [];
@@ -64,7 +61,6 @@ function displayUser(uName){
         mUser.followers = user.followers;
         mUser.following = user.following;
         mUser.public_repos = user.public_repos;
-        //console.log(mUser); 
         return mUser;
     }).then(us=>{
         resultElem.innerHTML = `<div class='user-image'>
@@ -127,7 +123,6 @@ function getUserFollowers(uName) {
    return job;
 }
 function displayFollowers(uName){
-    //console.log(getUserFollowers(uName));
     getUserFollowers(uName).then(followers =>{
         followers.forEach(follower =>{
             let obj = Object.create(null);
@@ -154,7 +149,6 @@ function displayFollowers(uName){
       });
       s+=`</ul>`
       followerElem.innerHTML = s;
-      //console.log(rep);
     })
 }
 
@@ -232,14 +226,11 @@ function displayRepos(uName){
             </div>
           </li>`;
         });
-        s+=`</ul>`;////+ daysBetweenDate(repo.updated_at)<1?'days ago':'day ago'
+        s+=`</ul>`;
         repoElem.innerHTML = s;
-        //console.log(rep);
     })
 }
 
-//displayFollowers(name);
-//displayRepos(name);
 function process(event){
     if(event.keyCode == 13){
         name = this.value;
@@ -259,7 +250,6 @@ function processInstant(event){
   if(event.keyCode!=13){
     name = this.value;
     console.log(name);
-    //instantSearch(name);
   }
 }
 function daysBetweenDate(dt) {
