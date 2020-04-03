@@ -87,5 +87,6 @@ const fakeAPICall = (i) => {
 
 function getAllData() {
   let arr = fakePeople.map((elem, index) =>(fakeAPICall(index)));
-  Promise.all(arr).then(console.log);
+  Promise.all(arr).then(res => console.log(res));
 }
+getAllData();
