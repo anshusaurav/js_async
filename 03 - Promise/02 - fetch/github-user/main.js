@@ -73,9 +73,9 @@ function displayUser(uName){
       </div>
       <div class='user-info'>
         <div>
-          <h2>${us.name}<span>@${us.login}</span></h2> 
+          <h2>${us.name||''}<span>@${us.login}</span></h2> 
         </div>
-        <h3>${us.bio}</h3>
+        <h3>${us.bio||''}</h3>
         <div class='user-info-flex'>
           <i class="fas fa-user-friends"></i>
           <p>${us.company||''}</p>
