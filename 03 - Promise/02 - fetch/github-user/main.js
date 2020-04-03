@@ -1,7 +1,6 @@
 // Your code goes here
-let p = document.createElement('p');
-document.body.append(p);
-let name='nnnkit';
+// let p = document.createElement('p');
+// document.body.append(p);
 let mUser = {};
 const repoList = [];
 const followerList = [];
@@ -133,6 +132,7 @@ function displayFollowers(uName){
         followers.forEach(follower =>{
             let obj = Object.create(null);
             obj.avatar_url = follower.avatar_url;
+            obj.url = follower.html_url;
             obj.login = follower.login;
             followerList.push(obj);
         });
@@ -148,7 +148,7 @@ function displayFollowers(uName){
             <img class='image-fol' src=${foll.avatar_url} alt=${foll.login}/>
           </div>
           <div>
-            <p class='follower-id'>${foll.login}</p>
+            <a class='follower-id' href=${foll.url}>${foll.login}</a>
           </div>
         </li>`;
       });
@@ -214,7 +214,7 @@ function displayRepos(uName){
             <p class='repo-desc'>${repo.description||''}</p>
             <div class='li-footer'>
               <div class='li-footer-left'>
-                <div>
+                <div class='repo-lang'>
                   <p>${repo.lang||' '}</p>
                 </div>
                 <div class='star-div'>
