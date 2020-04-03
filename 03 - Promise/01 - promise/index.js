@@ -56,7 +56,6 @@ delay().then(sayHello);
 
 
 // Challenge 6
-//
 // ADD CODE BELOW
 var secondPromise = new Promise(function(resolve, reject){
   setTimeout(() => resolve("Second!"), 1000);
@@ -64,7 +63,7 @@ var secondPromise = new Promise(function(resolve, reject){
 var firstPromise = new Promise(function(resolve, reject){
   setTimeout(() => resolve(secondPromise), 1000);
 });
-firstPromise.then
+firstPromise.then(sP => console.log(sP));
 
 
 // Challenge 7

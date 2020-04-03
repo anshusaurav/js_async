@@ -54,21 +54,29 @@
 // promise.then(() => console.log('Promise has been resolved!'));
 // console.log("I'm not the promise!");
 
-function sayHello() {
-  setTimeout(()=> console.log('Hello'), 1000);
-}
-function delay(){
-  let promise = new Promise(function (resolve, reject) {
-    // ADD CODE HERE
-    setTimeout(() => resolve("done"), 1000);
-  });
+// function sayHello() {
+//   setTimeout(()=> console.log('Hello'), 1000);
+// }
+// function delay(){
+//   let promise = new Promise(function (resolve, reject) {
+//     // ADD CODE HERE
+//     setTimeout(() => resolve("done"), 1000);
+//   });
   
-  return promise;
-}
+//   return promise;
+// }
+
+var secondPromise = new Promise(function(resolve, reject){
+  setTimeout(() => resolve("Second!"), 1000);
+});
+var firstPromise = new Promise(function(resolve, reject){
+  setTimeout(() => resolve(secondPromise), 1000);
+});
+firstPromise.then(sP => console.log(sP));
 
 // Uncomment the code below to test
 // This code should log "Hello" after 1000ms
-delay().then(sayHello);
+
 
   </script>
 
