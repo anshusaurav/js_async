@@ -10,10 +10,14 @@ const searchinputElem = document.querySelector('#searchinput');
 const repoElem = document.querySelector('.repos');
 const allRepoElem = document.querySelector('.all-repos');
 const followerElem = document.querySelector('.followers');
-searchinputElem.addEventListener('keydown', process);
+searchinputElem.addEventListener('keyup', process);
 searchinputElem.addEventListener('keyup', processInstant);
 function instantSearch(uName){
-  let job = fetch(`https://api.github.com/search/users?q=${uName}`)
+  let job = fetch(`https://api.github.com/search/users?q=${uName}`,{
+    headers: {"Content-Type": "application/json"
+    },
+    mode:"no-cors"
+  })
   .then(
         successResponse => {
             if (successResponse.status != 200) {
@@ -31,9 +35,8 @@ function instantSearch(uName){
    return job;
 }
 function getUser(uName) {
-    let job = fetch(`https://api.github.com/users/${uName}`,{
-      credentials: "same-origin",
-    }).then(
+    let job = fetch(`https://api.github.com/users/${uName}`)
+    .then(
         successResponse => {
             if (successResponse.status != 200) {
                 return null;
@@ -75,15 +78,15 @@ function displayUser(uName){
         <h3>${us.bio}</h3>
         <div class='user-info-flex'>
           <i class="fas fa-user-friends"></i>
-          <p>${us.company}</p>
+          <p>${us.company||''}</p>
         </div>
         <div class='user-info-flex'>
           <i class="fas fa-map-marker-alt"></i>
-          <p>${us.location}</p>
+          <p>${us.location||''}</p>
         </div>
         <div class='user-info-flex'>
           <i class="fab fa-microblog"></i>
-          <a href=${us.blog}>${us.blog}</a>
+          <a href=${us.blog||''}>${us.blog||''}</a>
         </div>
         <div class='user-data'>
           <div>
@@ -108,9 +111,8 @@ function displayUser(uName){
     });
 }
 function getUserFollowers(uName) {
-    let job = fetch(`https://api.github.com/users/${uName}/followers`,{
-      credentials: "same-origin",
-    }).then(
+    let job = fetch(`https://api.github.com/users/${uName}/followers`)
+    .then(
         successResponse => {
             if (successResponse.status != 200) {
                 return null;
@@ -158,9 +160,8 @@ function displayFollowers(uName){
 
 
 function getUserRepos(uName) {
-    let job = fetch(`https://api.github.com/users/${uName}/repos`,{
-      credentials: "same-origin",
-    }).then(
+    let job = fetch(`https://api.github.com/users/${uName}/repos`)
+    .then(
         successResponse => {
             if (successResponse.status != 200) {
                 return null;
@@ -200,6 +201,13 @@ function displayRepos(uName){
         <ul class='all-repos'>
         </ul>`;
         rep.forEach(repo => {
+          let str = '';
+          if(daysBetweenDate(repo.updated_at) == 0)
+            str = 'Today';
+          else if(daysBetweenDate(repo.updated_at) == 1)
+            str = 'Yesterday';
+          else
+            str = daysBetweenDate(repo.updated_at) + ' days ago';
             s+= `<li class='repo-li'>
             <a href=${repo.html_url} target='_blank'>${repo.name}</a>
             <a id='fork-link' href=${repo.forks_url}>(fork)</a>
@@ -219,12 +227,12 @@ function displayRepos(uName){
                 </div>
               </div>
               <div>
-                <p>${repo.updated_at}</p>
+                <p>${str}</p>
               </div>
             </div>
           </li>`;
         });
-        s+=`</ul>`
+        s+=`</ul>`;////+ daysBetweenDate(repo.updated_at)<1?'days ago':'day ago'
         repoElem.innerHTML = s;
         //console.log(rep);
     })
@@ -255,5 +263,9 @@ function processInstant(event){
   }
 }
 function daysBetweenDate(dt) {
-
+  let d1= new Date(Date.now());
+  let d2 = new Date(dt);
+  const oneDay = 24 * 60 * 60 * 1000;
+  const diffDays = Math.round(Math.abs((d1 - d2) / oneDay));
+  return diffDays;
 }

@@ -12,9 +12,7 @@ sayHello(); // should log "Hello" after 1000ms
 var promise = new Promise(function (resolve, reject) {
   setTimeout(()=>resolve('Resolved!'),1000);
 });
-promise.then(
-  result => console.log(result)
-);
+promise.then(console.log);
 // Should print out "Resolved!"
 // ADD CODE HERE
 
@@ -22,11 +20,10 @@ promise.then(
 // Challenge 3
 
 promise = new Promise(function(resolve, reject) {
-  reject('Rejected');
-})
-promise.then(
-  error=>console.log(error)
-)
+  reject(new Error("Rejected!"));
+});
+promise.catch(console.log);
+
 // Should print out "Reject!"
 // ADD CODE HERE
 
@@ -35,28 +32,39 @@ promise.then(
 
 promise = new Promise(function (resolve, reject) {
   // ADD CODE HERE
+  setTimeout(() => resolve("Promise has been resolved!"), 1000);
 });
 
 // Uncomment the lines below when ready
-// promise.then(() => console.log('Promise has been resolved!));
-// console.log("I'm not the promise!");
-
+promise.then(() => console.log('Promise has been resolved!'));
+console.log("I'm not the promise!");
 
 // Challenge 5
 function delay(){
-
+  let promise = new Promise(function (resolve, reject) {
+    // ADD CODE HERE
+    setTimeout(() => resolve("done"), 1000);
+  });
+  
+  return promise;
 }
+
 
 // Uncomment the code below to test
 // This code should log "Hello" after 1000ms
-// delay().then(sayHello);
+delay().then(sayHello);
 
 
 // Challenge 6
 //
 // ADD CODE BELOW
-// var secondPromise =
-// var firstPromise =
+var secondPromise = new Promise(function(resolve, reject){
+  setTimeout(() => resolve("Second!"), 1000);
+});
+var firstPromise = new Promise(function(resolve, reject){
+  setTimeout(() => resolve(secondPromise), 1000);
+});
+firstPromise.then
 
 
 // Challenge 7
